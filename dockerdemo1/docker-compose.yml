@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL : jdbc:mysql://db:3306/telusko2
+      SPRING_DATASOURCE_USERNAME : navin
+      SPRING_DATASOURCE_PASSWORD : 1234
+    networks:
+      - net1
+
+  db:
+    image: mysql:latest
+    environment:
+      DATABASE_HOST : docker-mysql
+      DATABASE_PORT: 3307
+      MYSQL_ROOT_PASSWORD : 1234
+      MYSQL_USER: navin
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: telusko2
+
+
+    networks:
+      - net1
+
+
+networks:
+  net1:
+    driver: bridge
